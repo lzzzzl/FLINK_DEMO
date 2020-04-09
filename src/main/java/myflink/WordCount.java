@@ -36,7 +36,7 @@ public class WordCount {
 
         @Override
         public void flatMap(String value, Collector<Tuple2<String, Integer>> out) throws Exception {
-            // 初始化并切割语句，匹配由大小写英文字母数字和下划线组成的1个或多个字符
+            // 初始化并切割语句，匹配非字母、数字、下划线组成的1个或多个字符
             String[] tokens = value.toLowerCase().split("\\W+");
 
             // 生成(key, value)
