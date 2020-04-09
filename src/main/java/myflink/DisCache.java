@@ -1,5 +1,6 @@
 package myflink;
 
+
 import org.apache.commons.io.FileUtils;
 import org.apache.flink.api.common.functions.RichMapFunction;
 import org.apache.flink.api.java.DataSet;
@@ -22,7 +23,7 @@ public class DisCache {
 
         //1：注册一个文件,可以使用hdfs上的文件 也可以是本地文件进行测试
         //text 中有4个单词:hello flink hello FLINK
-        env.registerCachedFile("/home/zzl/opt/flink-1.7.2/file","a.txt");
+        env.registerCachedFile("/home/zzl/opt/flink-1.7.2/file/a.txt","a.txt");
 
         DataSource<String> data = env.fromElements("a", "b", "c", "d");
 
@@ -34,6 +35,7 @@ public class DisCache {
                 super.open(parameters);
                 // 使用文件
                 File file = getRuntimeContext().getDistributedCache().getFile("a.txt");
+                System.err.println("分布式缓存为：" + file.getPath());
                 List<String> lines = FileUtils.readLines(file);
                 for (String line : lines) {
                     this.dataList.add(line);
