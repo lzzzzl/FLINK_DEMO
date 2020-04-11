@@ -24,7 +24,6 @@ public class RestartStrategy {
         env.setRestartStrategy(RestartStrategies.fixedDelayRestart( 3,// 尝试重启的次数
                 Time.of(1, TimeUnit.MINUTES)));
 
-
         //5分钟内若失败了3次则认为该job失败，重试间隔为10s
         env.setRestartStrategy(RestartStrategies.failureRateRestart(3,
                 Time.of(5,TimeUnit.MINUTES),Time.of(10,TimeUnit.SECONDS)));
