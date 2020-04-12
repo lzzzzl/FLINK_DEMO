@@ -59,7 +59,7 @@ public class TopN {
 
         DataStream<Tuple2<String, Integer>> wcount = ds
                 .keyBy(0)
-                .window(SlidingProcessingTimeWindows.of(Time.seconds(600),Time.seconds(5)))
+                .window(SlidingProcessingTimeWindows.of(Time.seconds(10),Time.seconds(5)))
                 //key之后的元素进入一个总时间长度为600s,每5s向后滑动一次的滑动窗口
                 .sum(1);// 将相同的key的元素第二个count值相加
 
@@ -72,10 +72,6 @@ public class TopN {
 
         env.execute();
     }//
-
-
-
-
 
     private static final class LineSplitter implements
             FlatMapFunction<String, Tuple2<String, Integer>> {
