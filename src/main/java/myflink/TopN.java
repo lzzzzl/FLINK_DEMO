@@ -47,7 +47,7 @@ public class TopN {
         FlinkKafkaConsumer<String> input = new FlinkKafkaConsumer<>("topn", new SimpleStringSchema(), properties);
 
         //从最早开始消费 位点
-        input.setStartFromEarliest();
+        input.setStartFromLatest();
 
 
         DataStream<String> stream = env
@@ -92,6 +92,7 @@ public class TopN {
 			}*/
 
             //（书1,1） (书2，1) （书3,1）
+            System.out.println(value);
             out.collect(new Tuple2<String, Integer>(value, 1));
         }
     }
