@@ -52,7 +52,7 @@ public class TopN {
         DataStream<Tuple2<String, Integer>> wcount = ds.
                 keyBy(0).
                 //key之后的元素进入一个总时间长度为600s,每5s向后滑动一次的滑动窗口
-                window(SlidingProcessingTimeWindows.of(Time.seconds(600), Time.seconds(5))).
+                window(SlidingProcessingTimeWindows.of(Time.seconds(60), Time.seconds(5))).
                 sum(1);
         //(shu1, xx) (shu2,xx)....
         //所有key元素进入一个5s长的窗口（选5秒是因为上游窗口每5s计算一轮数据，topN窗口一次计算只统计一个窗口时间内的变化）
