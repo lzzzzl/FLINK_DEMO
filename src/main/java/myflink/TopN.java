@@ -44,7 +44,7 @@ public class TopN {
         FlinkKafkaConsumer<String> input = new FlinkKafkaConsumer<>("topn", new SimpleStringSchema(), properties);
 
         //从最早开始消费 位点
-        input.setStartFromEarliest();
+        input.setStartFromLatest();
 
         DataStream<String> stream = env.addSource(input);
         //将输入语句split成一个一个单词并初始化count值为1的Tuple2<String, Integer>类型
