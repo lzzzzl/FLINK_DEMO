@@ -33,8 +33,8 @@ public class MyNoParalleSource implements SourceFunction<String> {
             int i = new Random().nextInt(5);
             ctx.collect(books.get(i));
 
-            //每2秒产生一条数据
-            Thread.sleep(2000);
+            //每1秒产生一条数据
+            Thread.sleep(1000);
         }
 
     }

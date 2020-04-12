@@ -14,13 +14,17 @@ public class KafkaProducer {
 
     public static void main(String[] args) throws Exception {
         StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
+
         DataStreamSource<String> text = env.addSource(new MyNoParalleSource()).setParallelism(1);
 
         Properties properties = new Properties();
-        properties.setProperty("bootstrap.servers", "localhost:9092");
-        FlinkKafkaProducer<String> producer = new FlinkKafkaProducer("test",new SimpleStringSchema(),properties);
+        properties.setProperty("bootstrap.servers", "127.0.0.1:9092");
+        //new FlinkKafkaProducer("topn",new KeyedSerializationSchemaWrapper(new SimpleStringSchema()),properties,FlinkKafkaProducer.Semantic.EXACTLY_ONCE);
+        FlinkKafkaProducer<String> producer = new FlinkKafkaProducer("topn",new SimpleStringSchema(),properties);
+/*
+        //event-timestamp事件的发生时间
         producer.setWriteTimestampToKafka(true);
-
+*/
         text.addSink(producer);
         env.execute();
     }
