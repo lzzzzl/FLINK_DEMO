@@ -39,7 +39,7 @@ public class TopN {
 
         env.setParallelism(1);
 
-        env.setStreamTimeCharacteristic(TimeCharacteristic.ProcessingTime); //以processtime作为时间语义
+        env.setStreamTimeCharacteristic(TimeCharacteristic.EventTime); //EventTime
 
 
         Properties properties = new Properties();
